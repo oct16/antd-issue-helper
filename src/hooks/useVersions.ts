@@ -1,18 +1,17 @@
 import * as api from '../api'
-import { state } from 'reactive.macro'
+import { useCallback, useState } from 'react'
 
 export default function useVersions() {
-    let repoVersions: { [repo: string]: string[] } = state({})
+    const [repoVersions, setRepoVersions] = useState<{ [repo: string]: string[] }>({})
 
-    const fetchVersions = (repo: string) => {
-        api.fetchVersions(repo).then(
-            (versions: string[]) =>
-                (repoVersions = {
-                    ...repoVersions,
-                    [repo]: versions
-                })
+    const fetchVersions = useCallback((repo: string) => {
+        api.fetchVersions(repo).then((versions: string[]) =>
+            setRepoVersions(repoVersions => ({
+                ...repoVersions,
+                [repo]: versions
+            }))
         )
-    }
+    }, [])
 
     return { repoVersions, fetchVersions }
 }
