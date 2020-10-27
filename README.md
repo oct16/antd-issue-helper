@@ -1,6 +1,6 @@
-# Ant Design Issue Helper
+# TimeCat Issue Helper
 
-Inspired by https://github.com/vuejs/vue-issue-helper
+Modified from https://github.com/ant-design/antd-issue-helper
 
 ## Development
 

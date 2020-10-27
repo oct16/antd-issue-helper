@@ -12,12 +12,12 @@ Screenshots or videos are **NOT** reproductions! They only show that the bug exi
 
 Some users would give us a link to a real project and hope we can help them figure out what is wrong. We generally do not accept such requests because:
 
-- You are already familiar with your codebase, but we are not. It is extremely time-consuming to hunt a bug in a big and unfamiliar codebase.
+-   You are already familiar with your codebase, but we are not. It is extremely time-consuming to hunt a bug in a big and unfamiliar codebase.
 
-- The problematic behavior may very well be caused by your code rather than by a bug in antd.
+-   The problematic behavior may very well be caused by your code rather than by a bug in antd.
 
 A **minimal** reproduction means it demonstrates the bug, and the bug only. It should only contain the bare minimum amount of code that can reliably cause the bug. Try your best to get rid of anything that aren't directly related to the problem.
 
 ##### How to create a repro
 
-Unless your bug can only be reproduced with a built setup, we prefer reproductions made with <a href="http://codepen.io/benjycui/pen/KgPZrE?editors=001" target="_blank">Codepen for antd</a> / <a href="http://codepen.io/paranoidjk/pen/LWpaKe" target="_blank">CodePen for antd-mobile</a>. If your bug involves a build setup, you can create a project using <a href="https://ant.design/docs/react/use-with-create-react-app" target="_blank">create-react-app</a> and provide the link to a GitHub repository.
+Unless your bug can only be reproduced with a built setup, we prefer reproductions made with <a href="https://codesandbox.io" target="_blank">CodeSandbox</a> / <a href="https://codepen.io/" target="_blank">CodePen</a>

@@ -1,11 +1,11 @@
-import * as appLocaleData from 'react-intl/locale-data/en';
+import * as appLocaleData from 'react-intl/locale-data/en'
 
-const enMessages: any = require('./locales/en.json');
+const enMessages: any = require('./locales/en.json')
 
-(window as any).appLocale.en = {
-  messages: {
-    ...enMessages,
-  },
-  locale: 'en-US',
-  data: appLocaleData,
-};
+;(window as any).appLocale.en = {
+    messages: {
+        ...enMessages
+    },
+    locale: 'en-US',
+    data: appLocaleData
+}

@@ -1,7 +1,7 @@
 /// <reference types="react-scripts" />
 
 interface Window {
-  appLocale: any;
+    appLocale: any
 }
 
-declare module "mdx.macro";
+declare module 'mdx.macro'

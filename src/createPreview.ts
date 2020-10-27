@@ -1,23 +1,23 @@
 export default function createPreview(issueType: string, values: any) {
-  if (issueType === 'bug') {
-    return createBugPreview(values);
-  }
-  return createFeaturePreview(values);
+    if (issueType === 'bug') {
+        return createBugPreview(values)
+    }
+    return createFeaturePreview(values)
 }
 
 function createBugPreview({
-  version,
-  react,
-  system,
-  browser,
-  reproduction,
-  steps,
-  expected,
-  actual,
-  extra,
-  repo,
+    version,
+    react,
+    system,
+    browser,
+    reproduction,
+    steps,
+    expected,
+    actual,
+    extra,
+    repo
 }: any) {
-  return `
+    return `
 ### Reproduction link
 ${createReproductionLink(reproduction)}
 
@@ -32,33 +32,31 @@ ${actual}
 
 | Environment | Info |
 |---|---|
-| antd | ${version} |
-| React | ${react} |
 | System | ${system} |
 | Browser | ${browser} |
 
 ${extra ? `---\n${extra}` : ''}
-`.trim();
+`.trim()
 }
 
 function createFeaturePreview({ motivation, proposal }: any) {
-  return `
+    return `
 ### What problem does this feature solve?
 ${motivation}
 
 ### What does the proposed API look like?
 ${proposal}
-`.trim();
+`.trim()
 }
 
 function createReproductionLink(link: string) {
-  if (!link) {
-    return;
-  }
+    if (!link) {
+        return
+    }
 
-  if (link.indexOf('codesandbox.io') >= 0) {
-    return `[![Edit on CodeSandbox](https://codesandbox.io/static/img/play-codesandbox.svg)](${link})`;
-  }
+    if (link.indexOf('codesandbox.io') >= 0) {
+        return `[![Edit on CodeSandbox](https://codesandbox.io/static/img/play-codesandbox.svg)](${link})`
+    }
 
-  return `[${link}](${link})`;
+    return `[${link}](${link})`
 }
