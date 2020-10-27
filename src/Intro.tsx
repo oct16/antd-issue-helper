@@ -1,25 +1,25 @@
 import * as React from 'react'
 import IntroModal from './IntroModal'
 import I18n from './I18n'
-import { state } from 'reactive.macro'
 import styles from './Intro.module.scss'
+import { useState } from 'react'
 
 const Intro: React.FC = () => {
-    let modalVisible = state(false)
+    const [modalVisible, setModalVisible] = useState(false)
     const introRef = React.useRef<null | HTMLDivElement>(null)
 
     React.useEffect(() => {
         introRef.current!.addEventListener('click', (e: Event) => {
             if ((e.target as any).getAttribute('href') === '#intro-modal') {
                 e.preventDefault()
-                modalVisible = true
+                setModalVisible(true)
             }
         })
     }, [])
 
     return (
         <div className={`${styles.intro} paragraph`} ref={introRef}>
-            <IntroModal visible={modalVisible} onCancel={() => (modalVisible = false)} />
+            <IntroModal visible={modalVisible} onCancel={() => setModalVisible(false)} />
             <I18n id="intro" />
         </div>
     )

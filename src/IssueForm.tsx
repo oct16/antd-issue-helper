@@ -2,7 +2,6 @@ import * as React from 'react'
 import { Form, Row, Col, Input, Select, Button, Radio } from 'antd'
 import { FormattedMessage } from 'react-intl'
 import { BugOutlined } from '@ant-design/icons'
-import { state } from 'reactive.macro'
 import BugForm from './BugForm'
 import FeatureForm from './FeatureForm'
 import PreviewModal from './PreviewModal'
@@ -12,6 +11,7 @@ import useSimilarIssues from './hooks/useSimilarIssues'
 import useVersions from './hooks/useVersions'
 import styles from './IssueForm.module.scss'
 import Bowser from 'bowser'
+import { useCallback, useState } from 'react'
 
 const { Option } = Select
 
@@ -28,11 +28,10 @@ if (!params.repo) {
 }
 
 const IssueForm: React.FC<{}> = () => {
-    let reproModal = state(false)
+    const [reproModalVisible, setReproModalVisible] = useState(false)
 
     const [form] = Form.useForm()
-
-    const getContent = (type: string) => createPreview(type, form.getFieldsValue())
+    const getContent = useCallback((type: string) => createPreview(type, form.getFieldsValue()), [form])
 
     const [content, setContent] = React.useState('')
     const [preview, setPreview] = React.useState(false)
@@ -49,7 +48,7 @@ const IssueForm: React.FC<{}> = () => {
         formRef.current!.addEventListener('click', (e: Event) => {
             if ((e.target as any).getAttribute('href') === '#repro-modal') {
                 e.preventDefault()
-                reproModal = true
+                setReproModalVisible(true)
             }
         })
     }, [])
@@ -102,13 +101,13 @@ const IssueForm: React.FC<{}> = () => {
 
     const handleTypeChange = React.useCallback(() => {
         restoreValues(['type'])
-    }, [])
+    }, [restoreValues])
 
     const handleTitleBlur = React.useCallback(() => {
         const repo = form.getFieldValue('repo')
         const title = form.getFieldValue('title')
         searchIssues(repo, title)
-    }, [])
+    }, [form, searchIssues])
 
     const handleCreate = React.useCallback(() => {
         const issueType = form.getFieldValue('type')
@@ -128,14 +127,14 @@ ${content}
         localStorage.clear()
 
         window.open(`https://github.com/oct16/${repo}/issues/new?title=${title}&body=${body}${label}`)
-    }, [])
+    }, [form, getContent])
 
     React.useEffect(() => {
         fetchVersions(params.repo)
         bindModalHandler()
         restoreValues()
         bindModalHandler()
-    }, [])
+    }, [fetchVersions, bindModalHandler, restoreValues])
 
     const repo = form.getFieldValue('repo')
     const versions = repoVersions[repo] || []
@@ -197,7 +196,7 @@ ${content}
                     }}
                     onCreate={handleCreate}
                 />
-                <ReproModal visible={reproModal} onCancel={() => (reproModal = false)} />
+                <ReproModal visible={reproModalVisible} onCancel={() => setReproModalVisible(false)} />
                 <Row>
                     <Col span={11}>
                         <Form.Item
