@@ -21,10 +21,7 @@ const App: React.FC = () => {
                 <Header className={styles.header}>
                     <div className={styles.headerContainer}>
                         <div className={styles.logo}>
-                            <img
-                                alt="logo"
-                                src="https://raw.githubusercontent.com/oct16/TimeCat/master/articles/images/logo.png"
-                            />
+                            <img alt="logo" src="https://timecatjs.com/img/logo.png" />
                             <h1>Issue Helper</h1>
                         </div>
                         <div className={styles.locale}>
